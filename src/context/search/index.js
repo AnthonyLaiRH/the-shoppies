@@ -18,8 +18,6 @@ const SearchProvider = (props) => {
     const url = `${process.env.REACT_APP_OMDB_URL}&s=${searchValue}&page=${page}`;
     const movieResults = [];
 
-    //console.log(`url ${url}`)
-
     let res = await fetch(url);
     if (!res.ok) {
       const message = `An error has occured: ${res.status}`;
@@ -47,12 +45,20 @@ const SearchProvider = (props) => {
     setLoading(false);
   };
 
+  // Only on change of searchValue, so when the value in the search bar is changed
+  // Reset the page to 1
   useEffect(() => {
-    //console.log(`page: ${page}`);
-    //console.log(`searchValue: ${searchValue}`);
+    setLoading(true);
+    setPage(1)
+    debouncedSearch();
+  }, [searchValue]);
+
+  // This is for changed to the debounceSearch function, which is changed when the page is changed
+  // As commented above in the useCallback
+  useEffect(() => {
     setLoading(true);
     debouncedSearch();
-  }, [searchValue, page, debouncedSearch]);
+  }, [debouncedSearch])
 
   return (
     <SearchContext.Provider
