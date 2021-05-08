@@ -4,7 +4,7 @@ const NominationContext = React.createContext();
 
 const NominationProvider = (props) => {
   // Look in local storage for nominations or empty array
-  const [nominations, setNominations] = useState(JSON.parse(localStorage.nominations) || []);
+  const [nominations, setNominations] = useState(JSON.parse(localStorage.nominations || "null") ||  []);
   
   const nominate = (movie) => {
     const found = nominations.some(el => el.imdbID === movie.imdbID);

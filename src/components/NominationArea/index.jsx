@@ -35,8 +35,9 @@ export const NominationArea = () => {
       {
         nominations.length === 0 
         ? <h3>Go nominate some movies!</h3>
-        : nominations.map((movie)=>(
+        : nominations.map((movie, i)=>(
           <Pane
+            key={i}
             width="50%"
             float="left"
           >
