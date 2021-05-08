@@ -18,7 +18,7 @@ const SearchProvider = (props) => {
     const url = `${process.env.REACT_APP_OMDB_URL}&s=${searchValue}&page=${page}`;
     const movieResults = [];
 
-    let res = await fetch(url);
+    let res = await fetch(url, {mode: 'cors'});
     if (!res.ok) {
       const message = `An error has occured: ${res.status}`;
       throw new Error(message);
